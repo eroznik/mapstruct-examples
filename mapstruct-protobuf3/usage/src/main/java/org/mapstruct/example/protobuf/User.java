@@ -10,7 +10,7 @@ public class User {
 
     private String id;
     private String email;
-    private List<Permission> permissions = new ArrayList<>();
+    private Permission[] permissions;
     private List<Department> mainDepartments = new ArrayList<>();
     private List<Department> departments = new ArrayList<>();
 
@@ -30,11 +30,11 @@ public class User {
         this.email = email;
     }
 
-    public List<Permission> getPermissions() {
+    public Permission[] getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(List<Permission> permissions) {
+    public void setPermissions(Permission[] permissions) {
         this.permissions = permissions;
     }
 

@@ -26,7 +26,7 @@ public class ProtobufTest {
         User user = new User();
         user.setId("");
         user.setEmail("test");
-        user.getPermissions().add(Permission.ADMIN);
+        user.setPermissions(new Permission[]{Permission.ADMIN});
         user.getMainDepartments().add(new Department("SALES"));
         user.getDepartments().add(new Department("AFTER_MARKET"));
 
@@ -36,7 +36,7 @@ public class ProtobufTest {
 
         Assert.assertEquals("", back.getId());
         Assert.assertEquals("test", back.getEmail());
-        Assert.assertTrue(back.getPermissions().contains(Permission.ADMIN));
+        Assert.assertEquals(Permission.ADMIN, back.getPermissions()[0]);
 
         Assert.assertEquals(1,back.getMainDepartments().size());
         Assert.assertEquals("SALES",back.getMainDepartments().get(0).getName());
@@ -51,7 +51,7 @@ public class ProtobufTest {
         User user = new User();
         // if id is null we should get the default empty string
         user.setEmail("test");
-        user.getPermissions().add(Permission.ADMIN);
+        user.setPermissions(new Permission[]{Permission.ADMIN});
 
         UserDTO dto = UserMapper.INSTANCE.map(user);
         UserDTO deserialized = UserDTO.parseFrom(dto.toByteArray());
@@ -59,6 +59,6 @@ public class ProtobufTest {
 
         Assert.assertEquals("", back.getId());
         Assert.assertEquals("test", back.getEmail());
-        Assert.assertTrue(back.getPermissions().contains(Permission.ADMIN));
+        Assert.assertEquals(Permission.ADMIN, back.getPermissions()[0]);
     }
 }
